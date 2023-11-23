@@ -44,5 +44,20 @@ contract voting {
             votes[msg.sender].timestamp
         );
         return true;
+
+
+    function removeVote() external returns(bool){
+        delete votes[msg.sender];
+        
+        emit RemoveVote(msg.sender);
+        return true;
+
+    }
+    
+    function getVote(address voterAddress) external view returns(address candidateAddress){
+        return votes[voterAddress].receiver;
+
+    }
+    
     }
 }
