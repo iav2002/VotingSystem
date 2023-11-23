@@ -1,8 +1,10 @@
+//SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.6.9;
 
 contract voting {
     //Structure of Voting
-
+bool public isVoting;
+// Helper
     struct Vote {
         address receiver;
         uint256 timestamp; //
@@ -24,13 +26,13 @@ contract voting {
 
     function startVoting() external returns (bool) {
         isVoting = true;
-        emit StartVoting(ms.sender);
+        emit StartVoting(msg.sender);
         return true;
     }
 
     function stopVoting() external returns (bool) {
         isVoting = false;
-        emit stopVoting(msg.sender);
+        emit StopVoting(msg.sender);
         return true;
     }
 
