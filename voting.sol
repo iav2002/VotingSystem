@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.9;
 
 contract voting {
     //Structure of Voting
@@ -44,7 +44,7 @@ contract voting {
             votes[msg.sender].timestamp
         );
         return true;
-
+    }
 
     function removeVote() external returns(bool){
         delete votes[msg.sender];
@@ -59,5 +59,5 @@ contract voting {
 
     }
     
-    }
+    
 }
