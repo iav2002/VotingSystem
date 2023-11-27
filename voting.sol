@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.6.9;
+pragma solidity ^0.8.7;
 
 contract voting {
     //Structure of Voting
@@ -20,7 +20,7 @@ bool public isVoting;
     event StartVoting(address startedBy);
     event StopVoting(address stoppedBy);
 
-    constructor() public {
+    constructor()  {
         isVoting = false;
     }
 
@@ -38,7 +38,7 @@ bool public isVoting;
 
     function addVote(address receiver) external returns (bool) {
         votes[msg.sender].receiver = receiver;
-        votes[msg.sender].timestamp = now;
+        votes[msg.sender].timestamp = block.timestamp;
 
         emit AddVote(
             msg.sender,
