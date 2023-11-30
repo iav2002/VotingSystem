@@ -7,15 +7,16 @@ contract voting {
     // Helper
     struct Vote {
         address receiver;
-        uint256 timestamp; //
+        uint256 timestamp;
+        bool hasVoted;
 
         // mapping address with receiver
     }
+
+    uint public balancedReceived; //Total balance received (in Wei)
     mapping(address => Vote) public votes;
 
     //defining events
-
-    event AddVote(address indexed voter, address receiver, uint256 timestamp);
     event RemoveVote(address voter);
     event StartVoting(address startedBy);
     event StopVoting(address stoppedBy);
@@ -36,16 +37,9 @@ contract voting {
         return true;
     }
 
-    function addVote(address receiver) external returns (bool) {
-        votes[msg.sender].receiver = receiver;
-        votes[msg.sender].timestamp = block.timestamp;
-
-        emit AddVote(
-            msg.sender,
-            votes[msg.sender].receiver,
-            votes[msg.sender].timestamp
-        );
-        return true;
+    //Function to add a vote to a specific address
+    function addVoteTo(address payable _to) public {
+        _to.transfer(getBalance());
     }
 
     function removeVote() external returns (bool) {
