@@ -3,8 +3,8 @@ pragma solidity ^0.8.7;
 
 contract voting {
     //Structure of Voting
-bool public isVoting;
-// Helper
+    bool public isVoting;
+    // Helper
     struct Vote {
         address receiver;
         uint256 timestamp; //
@@ -20,7 +20,7 @@ bool public isVoting;
     event StartVoting(address startedBy);
     event StopVoting(address stoppedBy);
 
-    constructor()  {
+    constructor() {
         isVoting = false;
     }
 
@@ -48,18 +48,15 @@ bool public isVoting;
         return true;
     }
 
-    function removeVote() external returns(bool){
+    function removeVote() external returns (bool) {
         delete votes[msg.sender];
-        
+
         emit RemoveVote(msg.sender);
         return true;
-
     }
-    
-    function getVote(address voterAddress) external view returns(address candidateAddress){
-        return votes[voterAddress].receiver;
 
+    //Function to submit a vote with a payment
+    function getVote() public payable {
+        balancedReceived += msg.value; //Update the balance received
     }
-    
-    
 }
