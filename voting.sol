@@ -14,18 +14,6 @@ contract voting {
         isVoting = false;
     }
 
-    function startVoting() external returns (bool) {
-        isVoting = true;
-        emit StartVoting(msg.sender);
-        return true;
-    }
-
-    function stopVoting() external returns (bool) {
-        isVoting = false;
-        emit StopVoting(msg.sender);
-        return true;
-    }
-
     //Function to add a vote to a specific address
     function addVoteTo(address payable _to) public {
         _to.transfer(getBalance());
@@ -43,9 +31,23 @@ contract voting {
     }
 
 
+ function startVoting() external returns (bool) {
+        isVoting = true;
+        emit StartVoting(msg.sender);
+        return true;
+    }
+
+    function stopVoting() external returns (bool) {
+        isVoting = false;
+        emit StopVoting(msg.sender);
+        return true;
+    }
+
+bool public isVoting;
+
+}
 
 //  //Structure of Voting
-        bool public isVoting;
 //     // Helper
 //     struct Vote {
 //         address receiver;
@@ -62,6 +64,25 @@ contract voting {
 
 //         emit RemoveVote(msg.sender);
 //         return true;
-//     }
+//     }  
+     //Add vote 
+// function addVote(address _candidate) external {
+//     // Check if the voting is active
+//     require(isVoting, "Voting is not active");
+//     // Check if the sender has not already voted
+//     require(!votes[msg.sender].hasVoted, "Voter has already voted");
 
-}
+//     // Record the vote
+//     votes[msg.sender] = Vote({
+//         receiver: _candidate,
+//         timestamp: block.timestamp,
+//         hasVoted: true
+//     });
+
+//     // Emit an event (if needed)
+//     emit AddVote(msg.sender, _candidate);
+    
+
+
+
+
