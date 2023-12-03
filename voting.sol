@@ -1,35 +1,17 @@
 //SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.7;
+pragma solidity >=0.4.0 <0.9.0;
 
 contract voting {
 
-    uint public balancedReceived; //Total balance received (in Wei)
+    uint public balancedReceived; //Total balance received in ITH
     
     //defining events
-    event RemoveVote(address voter);
     event StartVoting(address startedBy);
     event StopVoting(address stoppedBy);
 
     constructor() {
         isVoting = false;
     }
-
-    //Function to add a vote to a specific address
-    function addVoteTo(address payable _to) public {
-        _to.transfer(getBalance());
-    }
-
- 
-    //Function to submit a vote with a payment
-    function getVote() public payable {
-        balancedReceived += msg.value; //Update the balance received
-    }
-
-    //Retains the contract's balance
-    function getBalance() public view returns (uint) {
-        return address(this).balance;
-    }
-
 
  function startVoting() external returns (bool) {
         isVoting = true;
@@ -44,6 +26,24 @@ contract voting {
     }
 
 bool public isVoting;
+
+    //Function to add a vote to a specific address
+    function addVoteTo(address payable _to) public {
+        _to.transfer(getBalance());
+    }
+
+ 
+    //Function to submit a vote with a payment
+    function getVote() public payable {
+        
+        balancedReceived += msg.value; //Update the balance received
+    }
+
+    //Retains the contract's balance
+    function getBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+
 
 }
 
